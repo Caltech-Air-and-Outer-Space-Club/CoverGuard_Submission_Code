@@ -1,0 +1,11 @@
+# Core ML
+lightgbm>=4.0
+scikit-learn>=1.3
+numpy>=1.24
+pandas>=2.0
+
+# HLS data pull (NASA Earthdata)
+earthaccess>=0.9
+rioxarray>=0.15
+geopandas>=0.14
+shapely>=2.0
