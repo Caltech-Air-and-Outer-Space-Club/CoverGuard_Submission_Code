@@ -32,8 +32,16 @@ The ground pipeline downloads real satellite data directly from NASA. You need a
    - **NASA GESDISC DATA ARCHIVE**
 3. When you run Section 2, you will be prompted to enter your Earthdata username and password interactively. Credentials are cached to `~/.netrc` after the first login.
 
-> **Note:** Sections 3 (classifier) and 4 (downlink simulation) do **not** require a NASA account and can be run fully offline.
+### 3. Large Folders (not included in this repository)
+Three folders exceed GitHub's file size limit and must be downloaded separately before running.
 
+| Folder | Download |
+|---|---|
+| `classifier_training_datasets/` | [Download](https://drive.google.com/drive/folders/1jT-xRm-wMbxGLHx8KT4QLlKsrK-RFM6W?usp=sharing) |
+| `downlink_stages/` | [Download](https://drive.google.com/drive/folders/1sG2ycwLDuz1Erj8zZ2st16RLkZyXPjEl?usp=sharing) |
+| `outputs/` | [Download](https://drive.google.com/drive/folders/1SEgNjanfQsYNfYihcPPiahIuBLD_kX-Y?usp=drive_link) |
+
+Place each downloaded folder in the root of the repository before running.
 
 ---
 
