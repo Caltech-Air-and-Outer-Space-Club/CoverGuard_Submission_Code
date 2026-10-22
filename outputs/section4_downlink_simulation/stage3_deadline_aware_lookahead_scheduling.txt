@@ -1,0 +1,60 @@
+CoverGuard downlink scheduler simulation
+================================================
+Single scenario seed: 7
+Simulation hours: 72
+Satellites: 4
+Generated packets: 408
+Generated emergency faults: 96
+Generated regular faults: 253
+Generated full raw-data requests: 59
+Ground contacts: 54
+Total available capacity per scheduler: 134,699 KB
+
+Single-seed scheduler summary
+    scheduler  total_utility  delivered_kb  value_per_kb  capacity_utilization  emergency_delivery_rate  regular_fault_delivery_rate  median_emergency_latency_h  median_regular_latency_h  emergency_on_time_rate  regular_on_time_rate  raw_on_time_completion_rate  raw_request_completion_rate  partial_raw_kb_zero_utility  partial_raw_utility  stale_superseded_removed
+   naive_fifo  1,906,246.446    96,930.000        19.666                 0.720                    0.771                        0.775                       4.960                     4.328                   0.646                 0.775                        0.763                        0.763                   45,970.000                0.000                     0.000
+priority_fifo  2,108,544.123    96,930.000        21.753                 0.720                    0.927                        0.945                       2.655                     2.610                   0.927                 0.945                        0.763                        0.763                   43,861.000                0.000                     0.000
+     adaptive  2,244,430.638    96,797.000        23.187                 0.719                    0.927                        0.893                       2.655                     2.547                   0.927                 0.893                        0.797                        0.797                   32,276.000                0.000                    13.000
+
+Adaptive improvements
+               comparison  total_utility_improvement_pct  value_per_kb_improvement_pct  capacity_utilization_delta_pct_points  raw_completion_delta_pct_points  emergency_delivery_delta_pct_points  emergency_on_time_delta_pct_points  raw_on_time_completion_delta_pct_points
+   adaptive_vs_naive_fifo                         17.741                        17.903                                 -0.099                            3.390                               15.625                              28.125                                    3.390
+adaptive_vs_priority_fifo                          6.445                         6.591                                 -0.099                            3.390                                0.000                               0.000                                    3.390
+
+Delivered KB and value by packet/product class
+    scheduler             product_class  delivery_events  unique_packets  completed_products  transmitted_kb  completed_product_kb  delivered_utility
+   naive_fifo           emergency_fault               74              74                  74             314               314.000        170,006.783
+   naive_fifo             raw_data_full               45              45                  45           48345            92,188.000      1,586,765.385
+   naive_fifo raw_data_partial_fragment               31              29                   0           45970                 0.000              0.000
+   naive_fifo             regular_fault              196             196                 196            2301             2,301.000        149,474.278
+priority_fifo           emergency_fault               89              89                  89             374               374.000        308,232.373
+priority_fifo             raw_data_full               45              45                  45           49894            92,188.000      1,586,765.385
+priority_fifo raw_data_partial_fragment               31              29                   0           43861                 0.000              0.000
+priority_fifo             regular_fault              239             239                 239            2801             2,801.000        213,546.366
+     adaptive           emergency_fault               89              89                  89             374               374.000        308,232.373
+     adaptive             raw_data_full               47              47                  47           61519            91,373.000      1,723,423.526
+     adaptive raw_data_partial_fragment               31              23                   0           32276                 0.000              0.000
+     adaptive             regular_fault              226             226                 226            2628             2,628.000        212,774.739
+
+Full raw request completion: adaptive vs priority FIFO
+    scheduler  raw_request_completion_rate  full_raw_completion_rate  raw_on_time_completion_rate  partial_raw_kb_zero_utility  partial_raw_utility
+priority_fifo                        0.763                     0.763                        0.763                   43,861.000                0.000
+     adaptive                        0.797                     0.797                        0.797                   32,276.000                0.000
+
+Raw fragmentation audit: partial fragments have zero decision utility
+    scheduler  generated_raw_requests  raw_chunk_transmissions  completed_full_raw_requests  raw_kb_downlinked  partial_raw_kb_zero_utility  partial_raw_utility  completion_chunk_utility  preview_sent_any  medium_sent_any
+   naive_fifo                      59                       76                           45         94,315.000                   45,970.000                0.000             1,586,765.385             False            False
+priority_fifo                      59                       76                           45         93,755.000                   43,861.000                0.000             1,586,765.385             False            False
+     adaptive                      59                       78                           47         93,795.000                   32,276.000                0.000             1,723,423.526             False            False
+
+Monte Carlo medians across 30 seeds
+Scheduler medians
+    scheduler  median_emergency_delivery_rate  median_full_raw_completion_rate  median_capacity_utilization  median_emergency_on_time_rate  median_regular_on_time_rate  median_raw_on_time_completion_rate  median_total_utility  median_value_per_kb  median_partial_raw_kb_zero_utility
+     adaptive                           0.962                            0.845                        0.699                          0.952                        0.879                               0.845         2,006,366.548               23.508                          26,965.000
+   naive_fifo                           0.812                            0.806                        0.700                          0.541                        0.853                               0.806         1,656,362.052               18.967                          35,567.500
+priority_fifo                           0.962                            0.794                        0.700                          0.959                        0.964                               0.794         1,862,554.923               21.778                          36,949.500
+
+Adaptive improvement medians
+               comparison  median_total_utility_improvement_pct  median_value_per_kb_improvement_pct  median_capacity_utilization_delta_pct_points  median_raw_completion_delta_pct_points  median_emergency_delivery_delta_pct_points  median_emergency_on_time_delta_pct_points  median_raw_on_time_completion_delta_pct_points
+   adaptive_vs_naive_fifo                                20.980                               21.221                                        -0.097                                   3.923                                      14.765                                     41.805                                           3.923
+adaptive_vs_priority_fifo                                 7.379                                7.499                                        -0.097                                   4.499                                       0.000                                      0.000                                           4.499

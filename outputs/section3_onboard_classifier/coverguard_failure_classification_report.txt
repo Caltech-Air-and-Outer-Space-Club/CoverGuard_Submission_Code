@@ -1,0 +1,21 @@
+                    precision    recall  f1-score   support
+
+           HEALTHY       1.00      1.00      1.00     30807
+   MOISTURE_STRESS       0.91      0.93      0.92       310
+    EXCESS_WETNESS       0.96      0.95      0.95        78
+  NUTRIENT_DEFICIT       0.92      0.98      0.95       217
+POOR_ESTABLISHMENT       0.89      0.94      0.91       124
+   PEST_OR_DISEASE       0.90      0.81      0.85       267
+
+          accuracy                           1.00     31803
+         macro avg       0.93      0.93      0.93     31803
+      weighted avg       1.00      1.00      1.00     31803
+
+
+Confusion Matrix:
+[[30801     0     3     1     0     2]
+ [    0   288     0     0     7    15]
+ [    4     0    74     0     0     0]
+ [    0     0     0   212     0     5]
+ [    0     5     0     0   117     2]
+ [    2    24     0    18     8   215]]

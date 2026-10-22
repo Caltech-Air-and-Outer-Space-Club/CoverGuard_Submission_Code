@@ -1,0 +1,51 @@
+CoverGuard downlink scheduler simulation
+================================================
+Single scenario seed: 7
+Simulation hours: 72
+Satellites: 4
+Generated packets: 408
+Generated emergency faults: 96
+Generated regular faults: 253
+Generated full raw-data requests: 59
+Ground contacts: 54
+Total available capacity per scheduler: 134,699 KB
+
+Single-seed scheduler summary
+    scheduler  total_utility  delivered_kb  value_per_kb  capacity_utilization  emergency_delivery_rate  regular_fault_delivery_rate  median_emergency_latency_h  median_regular_latency_h  raw_request_completion_rate  stale_superseded_removed
+   naive_fifo  1,850,524.698    78,211.000        23.661                 0.581                    0.906                        0.913                       2.812                     2.743                        0.661                     0.000
+priority_fifo  1,879,867.610    75,628.000        24.857                 0.561                    0.927                        0.945                       2.655                     2.610                        0.661                     0.000
+     adaptive  2,048,458.437    77,085.000        26.574                 0.572                    0.927                        0.893                       2.655                     2.547                        0.695                    13.000
+
+Adaptive improvements
+               comparison  total_utility_improvement_pct  value_per_kb_improvement_pct  capacity_utilization_delta_pct_points  raw_completion_delta_pct_points  emergency_delivery_delta_pct_points
+   adaptive_vs_naive_fifo                         10.696                        12.313                                 -0.836                            3.390                                2.083
+adaptive_vs_priority_fifo                          8.968                         6.909                                  1.082                            3.390                                0.000
+
+Delivered KB and value by packet/product class
+    scheduler   product_class  delivered_count  delivered_kb  delivered_utility
+   naive_fifo emergency_fault               87           366        297,510.866
+   naive_fifo   raw_data_full               39         75140      1,348,890.079
+   naive_fifo   regular_fault              231          2705        204,123.754
+priority_fifo emergency_fault               89           374        308,232.373
+priority_fifo   raw_data_full               39         72453      1,358,088.871
+priority_fifo   regular_fault              239          2801        213,546.366
+     adaptive emergency_fault               89           374        308,232.373
+     adaptive   raw_data_full               41         74083      1,527,619.981
+     adaptive   regular_fault              226          2628        212,606.083
+
+Full raw request completion: adaptive vs priority FIFO
+    scheduler  raw_request_completion_rate  full_raw_completion_rate
+priority_fifo                        0.661                     0.661
+     adaptive                        0.695                     0.695
+
+Monte Carlo medians across 30 seeds
+Scheduler medians
+    scheduler  median_emergency_delivery_rate  median_full_raw_completion_rate  median_capacity_utilization  median_total_utility  median_value_per_kb
+     adaptive                           0.962                            0.664                        0.478         1,755,895.247               29.267
+   naive_fifo                           0.956                            0.681                        0.520         1,698,944.202               25.911
+priority_fifo                           0.962                            0.667                        0.508         1,675,093.511               26.416
+
+Adaptive improvement medians
+               comparison  median_total_utility_improvement_pct  median_value_per_kb_improvement_pct  median_capacity_utilization_delta_pct_points  median_raw_completion_delta_pct_points  median_emergency_delivery_delta_pct_points
+   adaptive_vs_naive_fifo                                 5.062                               12.574                                        -2.376                                   0.000                                       0.000
+adaptive_vs_priority_fifo                                 5.905                               11.748                                        -0.854                                   2.000                                       0.000
