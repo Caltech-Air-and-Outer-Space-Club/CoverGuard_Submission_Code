@@ -1,7 +1,7 @@
 # Data compatibility audit: new sources vs. the CloudScout HLS training set
 
 Branch `data-compat-eval`, 2026-11-11. Nothing was trained; existing tiles, weights and LightGBM files were not modified.
-Reference weights: `CloudScout/trained_model/cloudscout.pt`. All numbers at threshold 0.5 unless stated.
+Reference weights: `trained_model/cloudscout.pt`. All numbers at threshold 0.5 unless stated.
 
 ## Verdicts
 
@@ -52,7 +52,7 @@ Decision-rule outcomes: Schema passes everywhere. Median-shift/IQR exceeds 0.5 i
 
 ## Source A: not tested
 
-`download_hls_regions.py` needs Earthdata credentials, which are not on this machine. The existing set already covers 12 regions (`CloudScout/hls_raw/scene_index.csv`, about 12 scenes each), so a good part of what this source is meant to add (varied regions, snow, cloud-heavy scenes) is already present. HLSL30 is the same product, so format and semantics should match by construction, but I did not verify that, nor compute any distribution check. A dry run (`--dry-run`) after you run `earthaccess.login()` once would show the granule count at no download cost.
+`download_hls_regions.py` needs Earthdata credentials, which are not on this machine. The existing set already covers 12 regions (`hls_raw/scene_index.csv`, about 12 scenes each), so a good part of what this source is meant to add (varied regions, snow, cloud-heavy scenes) is already present. HLSL30 is the same product, so format and semantics should match by construction, but I did not verify that, nor compute any distribution check. A dry run (`--dry-run`) after you run `earthaccess.login()` once would show the granule count at no download cost.
 
 ## Step 6: loader compatibility
 
@@ -82,11 +82,12 @@ Decision-rule outcomes: Schema passes everywhere. Median-shift/IQR exceeds 0.5 i
 ## Commands used
 
 ```
-python check_schema.py CloudScout/cloud_tiles cloud_tiles_l8biome cloud_tiles_l8biome_nothin cloud_tiles_cs12
+# run from CloudScout/
+python check_schema.py cloud_tiles cloud_tiles_l8biome cloud_tiles_l8biome_nothin cloud_tiles_cs12
 python convert_l8biome.py --root l8biome_raw/{snow_ice,grass_crops,barren_local} --out cloud_tiles_l8biome [--no-thin → cloud_tiles_l8biome_nothin]
 python convert_cloudsen12.py --out cloud_tiles_cs12 --limit 60
-python eval_folder.py --tiles <folder> --weights CloudScout/trained_model/cloudscout.pt --out compat_eval/<name>_metrics.json
-python domain_check.py CloudScout/cloud_tiles <cloud_tiles_l8biome | cloud_tiles_cs12>
+python eval_folder.py --tiles <folder> --weights trained_model/cloudscout.pt --out compat_eval/<name>_metrics.json
+python domain_check.py cloud_tiles <cloud_tiles_l8biome | cloud_tiles_cs12>
 python compat_eval/analyze.py
 ```
 HLS reference = the last 45 of 221 scene files (symlinks in `compat_eval/hls_heldout/`), the same split rule as `evaluate_gate.py`; I could not confirm the checkpoint was not trained on those files.

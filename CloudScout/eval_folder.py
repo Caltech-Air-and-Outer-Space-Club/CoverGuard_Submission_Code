@@ -1,13 +1,12 @@
 """Score the CURRENT CloudScout weights on every tile in a folder (no training, no split).
-   python eval_folder.py --tiles cloud_tiles_l8biome --weights CloudScout/trained_model/cloudscout.pt [--out compat_eval/l8biome_metrics.json]
+   python eval_folder.py --tiles cloud_tiles_l8biome --weights trained_model/cloudscout.pt [--out compat_eval/l8biome_metrics.json]
 Reports: baseline accuracy, accuracy / clear-tile discard / cloud-miss at several thresholds, ROC AUC,
 miss rate at a 2% clear-tile discard rate (the primary operating-point metric), and the by-cloud-fraction table."""
 import argparse, glob, json, os, sys
 import numpy as np, torch
 from sklearn.metrics import roc_auc_score
 
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "CloudScout"))
-sys.path.insert(0, os.path.join(os.getcwd(), "CloudScout"))   # run from the repo root
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from onboard_cloudscout import CloudScoutNet            # the repo's model definition
 
 ap = argparse.ArgumentParser()
